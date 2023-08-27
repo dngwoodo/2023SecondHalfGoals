@@ -1,5 +1,6 @@
-import { NestFactory } from '@nestjs/core';
+import { NestFactory, Reflector } from '@nestjs/core';
 import { AppApiModule } from './AppApiModule';
+import { ClassSerializerInterceptor } from '@nestjs/common';
 
 /**
  * @description
@@ -12,6 +13,10 @@ import { AppApiModule } from './AppApiModule';
  */
 async function bootstrap() {
   const app = await NestFactory.create(AppApiModule);
+  app.useGlobalInterceptors(
+    new ClassSerializerInterceptor(app.get(Reflector)),
+  );
+
   await app.listen(3000);
 }
 bootstrap();
