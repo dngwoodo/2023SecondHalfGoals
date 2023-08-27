@@ -1,5 +1,5 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import { AppApiModule } from './AppApiModule';
 
 /**
  * @description
@@ -11,7 +11,7 @@ import { AppModule } from './app.module';
  * 서비스 코드 실행(app.service.ts)
  */
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppApiModule);
   await app.listen(3000);
 }
 bootstrap();
