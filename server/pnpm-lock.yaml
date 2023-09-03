@@ -10,14 +10,17 @@ dependencies:
     version: 5.5.3
   '@mikro-orm/core':
     specifier: ^5.7.14
-    version: 5.7.14(@mikro-orm/postgresql@5.7.14)
+    version: 5.7.14(@mikro-orm/postgresql@5.7.14)(@mikro-orm/seeder@5.7.14)
   '@mikro-orm/nestjs':
     specifier: ^5.2.1
     version: 5.2.1(@mikro-orm/core@5.7.14)(@nestjs/common@10.0.0)(@nestjs/core@10.0.0)
   '@mikro-orm/postgresql':
     specifier: ^5.7.14
-    version: 5.7.14(@mikro-orm/core@5.7.14)
+    version: 5.7.14(@mikro-orm/core@5.7.14)(@mikro-orm/seeder@5.7.14)
   '@mikro-orm/reflection':
+    specifier: ^5.7.14
+    version: 5.7.14(@mikro-orm/core@5.7.14)
+  '@mikro-orm/seeder':
     specifier: ^5.7.14
     version: 5.7.14(@mikro-orm/core@5.7.14)
   '@nestjs/common':
@@ -553,6 +556,11 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
+  /@faker-js/faker@7.6.0:
+    resolution: {integrity: sha512-XK6BTq1NDMo9Xqw/YkYyGjSsg44fbNwYRx7QK2CuoQgyy+f1rrTDHoExVM5PsyXCtfl2vs2vVJ0MN0yN6LppRw==}
+    engines: {node: '>=14.0.0', npm: '>=6.0.0'}
+    dev: false
+
   /@humanwhocodes/config-array@0.11.10:
     resolution: {integrity: sha512-KVVjQmNUepDVGXNuoRRdmmEjruj0KfiGSbS8LVc12LMsWDQzRXJ0qdhN8L8uUigKpfEHRhlaQFY0ib1tnUbNeQ==}
     engines: {node: '>=10.10.0'}
@@ -855,7 +863,7 @@ packages:
     resolution: {integrity: sha512-Z7C/xXCiGWsg0KuKsHTKJxbWhpI3Vs5GwLfOean7MGyVFGqdRgBbAjOCh6u4bbjPc/8MJ2pZmK/0DLdCbivLDA==}
     engines: {node: '>=8'}
 
-  /@mikro-orm/core@5.7.14(@mikro-orm/postgresql@5.7.14):
+  /@mikro-orm/core@5.7.14(@mikro-orm/postgresql@5.7.14)(@mikro-orm/seeder@5.7.14):
     resolution: {integrity: sha512-og2TJ4mRdGKF8ok/xSdGNbznm+WFF6VJosJnneulmY4VirRNfDfp7uNPBOinewigS4Q8Ntdirmponx4KrOoMBg==}
     engines: {node: '>= 14.0.0'}
     peerDependencies:
@@ -891,7 +899,8 @@ packages:
       '@mikro-orm/sqlite':
         optional: true
     dependencies:
-      '@mikro-orm/postgresql': 5.7.14(@mikro-orm/core@5.7.14)
+      '@mikro-orm/postgresql': 5.7.14(@mikro-orm/core@5.7.14)(@mikro-orm/seeder@5.7.14)
+      '@mikro-orm/seeder': 5.7.14(@mikro-orm/core@5.7.14)
       acorn-loose: 8.3.0
       acorn-walk: 8.2.0
       dotenv: 16.3.1
@@ -932,7 +941,7 @@ packages:
       sqlite3:
         optional: true
     dependencies:
-      '@mikro-orm/core': 5.7.14(@mikro-orm/postgresql@5.7.14)
+      '@mikro-orm/core': 5.7.14(@mikro-orm/postgresql@5.7.14)(@mikro-orm/seeder@5.7.14)
       fs-extra: 11.1.1
       knex: 2.5.1(pg@8.11.1)
       pg: 8.11.1
@@ -951,12 +960,12 @@ packages:
       '@nestjs/common': ^8.0.0 || ^9.0.0 || ^10.0.0
       '@nestjs/core': ^8.0.0 || ^9.0.0 || ^10.0.0
     dependencies:
-      '@mikro-orm/core': 5.7.14(@mikro-orm/postgresql@5.7.14)
+      '@mikro-orm/core': 5.7.14(@mikro-orm/postgresql@5.7.14)(@mikro-orm/seeder@5.7.14)
       '@nestjs/common': 10.0.0(class-transformer@0.5.1)(class-validator@0.14.0)(reflect-metadata@0.1.13)(rxjs@7.8.1)
       '@nestjs/core': 10.0.0(@nestjs/common@10.0.0)(@nestjs/platform-express@10.0.0)(reflect-metadata@0.1.13)(rxjs@7.8.1)
     dev: false
 
-  /@mikro-orm/postgresql@5.7.14(@mikro-orm/core@5.7.14):
+  /@mikro-orm/postgresql@5.7.14(@mikro-orm/core@5.7.14)(@mikro-orm/seeder@5.7.14):
     resolution: {integrity: sha512-3nF/UtUZ9a8jj0bD7ONeLRLg5MIHNKJngl7yR3c8sRz9yTAX6bT0lttbCxCeL4Q6/5XdcDtjgAQMUrYx1QVPhQ==}
     engines: {node: '>= 14.0.0'}
     peerDependencies:
@@ -972,8 +981,9 @@ packages:
       '@mikro-orm/seeder':
         optional: true
     dependencies:
-      '@mikro-orm/core': 5.7.14(@mikro-orm/postgresql@5.7.14)
+      '@mikro-orm/core': 5.7.14(@mikro-orm/postgresql@5.7.14)(@mikro-orm/seeder@5.7.14)
       '@mikro-orm/knex': 5.7.14(@mikro-orm/core@5.7.14)(pg@8.11.1)
+      '@mikro-orm/seeder': 5.7.14(@mikro-orm/core@5.7.14)
       pg: 8.11.1
     transitivePeerDependencies:
       - better-sqlite3
@@ -992,9 +1002,21 @@ packages:
     peerDependencies:
       '@mikro-orm/core': ^5.0.0
     dependencies:
-      '@mikro-orm/core': 5.7.14(@mikro-orm/postgresql@5.7.14)
+      '@mikro-orm/core': 5.7.14(@mikro-orm/postgresql@5.7.14)(@mikro-orm/seeder@5.7.14)
       globby: 11.1.0
       ts-morph: 19.0.0
+    dev: false
+
+  /@mikro-orm/seeder@5.7.14(@mikro-orm/core@5.7.14):
+    resolution: {integrity: sha512-X4QCpvHCSU7+WdJpHgAzyWw+aGhd5mqvTI3UtJbuq/bxXKKDMX5pY96TPYr4QhoDm3/l2tDeF7hX/V6E3UwA0g==}
+    engines: {node: '>= 14.0.0'}
+    peerDependencies:
+      '@mikro-orm/core': ^5.0.0
+    dependencies:
+      '@faker-js/faker': 7.6.0
+      '@mikro-orm/core': 5.7.14(@mikro-orm/postgresql@5.7.14)(@mikro-orm/seeder@5.7.14)
+      fs-extra: 11.1.1
+      globby: 11.1.0
     dev: false
 
   /@nestjs/cli@10.0.0:

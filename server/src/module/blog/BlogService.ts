@@ -1,12 +1,10 @@
-import { Injectable } from "@nestjs/common";
-import { BlogRepository } from "./BlogRepository";
-import { BlogListResponse } from "./response/BlogListResponse";
+import { Injectable } from '@nestjs/common';
+import { BlogRepository } from './BlogRepository';
+import { BlogListResponse } from './response/BlogListResponse';
 
 @Injectable()
 export class BlogService {
-  constructor(
-    private readonly blogRepository: BlogRepository,
-  ){}
+  constructor(private readonly blogRepository: BlogRepository) {}
   async findList(
     pageNumber: number,
     pageSize: number,
