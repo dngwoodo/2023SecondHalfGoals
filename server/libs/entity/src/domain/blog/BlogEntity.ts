@@ -2,7 +2,7 @@ import { LocalDateTimeType } from '@app/entity/type/LocalDateTimeType';
 import { LocalDateTime } from '@js-joda/core';
 import { Entity, PrimaryKey, Property } from '@mikro-orm/core';
 @Entity()
-export class Blog {
+export class BlogEntity {
   /**
    * NOTE
    * primary key 는 auto-generate 해준다.
@@ -43,7 +43,7 @@ export class Blog {
   deletedAt?: LocalDateTime;
 
   static create(title: string, body: string) {
-    const blog = new Blog();
+    const blog = new BlogEntity();
 
     blog.title = title;
     blog.body = body;

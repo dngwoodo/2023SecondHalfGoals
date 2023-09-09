@@ -1,4 +1,4 @@
-import { Blog } from '@app/entity/domain/blog/Blog.entity';
+import { BlogEntity } from '@app/entity/domain/blog/BlogEntity';
 
 describe('Blog.entity', () => {
   /**
@@ -13,10 +13,10 @@ describe('Blog.entity', () => {
       const expectBody = 'test-body';
 
       // when <- 테스트 실행한 결과를 받아오는 곳
-      const result = Blog.create(expectTitle, expectBody);
+      const result = BlogEntity.create(expectTitle, expectBody);
 
       // then <- 실제 검증문
-      expect(result).toBeInstanceOf(Blog); // 실제 블로그 엔티티(인스턴스)를 반환하는가
+      expect(result).toBeInstanceOf(BlogEntity); // 실제 블로그 엔티티(인스턴스)를 반환하는가
       expect(result.title).toBe(expectTitle);
       expect(result.body).toBe(expectBody);
     });

@@ -1,4 +1,4 @@
-import { Blog } from '@app/entity/domain/blog/Blog.entity';
+import { BlogEntity } from '@app/entity/domain/blog/BlogEntity';
 import { InjectRepository } from '@mikro-orm/nestjs';
 import { EntityRepository } from '@mikro-orm/postgresql';
 import { Injectable } from '@nestjs/common';
@@ -8,21 +8,24 @@ import { FilterQuery, FindOptions, QueryOrder } from '@mikro-orm/core';
 @Injectable()
 export class BlogRepository {
   constructor(
-    @InjectRepository(Blog)
-    private readonly blogRepository: EntityRepository<Blog>,
+    @InjectRepository(BlogEntity)
+    private readonly blogRepository: EntityRepository<BlogEntity>,
   ) {}
 
-  async findOne(id: number): Promise<Blog | null> {
+  async findOne(id: number): Promise<BlogEntity | null> {
     return this.blogRepository.findOne({ id }); // {} <- where 절
   }
 
-  async findList(limit: number, offset: number): Promise<[Blog[], number]> {
-    const where: FilterQuery<Blog> = {
+  async findList(
+    limit: number,
+    offset: number,
+  ): Promise<[BlogEntity[], number]> {
+    const where: FilterQuery<BlogEntity> = {
       deletedAt: null,
       createdAt: { $gte: LocalDateTime.now().minusMonths(2) },
     };
 
-    const options: FindOptions<Blog> = {
+    const options: FindOptions<BlogEntity> = {
       /**
        * NOTE
        * orderBy: 이 옵션은 결과를 정렬하는 데 사용됩니다.
