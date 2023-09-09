@@ -2,7 +2,7 @@ import { Blog } from '@app/entity/domain/blog/Blog.entity';
 import { LocalDateTime } from '@js-joda/core';
 import { Exclude, Expose } from 'class-transformer';
 
-export class BlogListDto {
+export class BlogDto {
   @Exclude()
   private readonly _id: number;
 
@@ -26,7 +26,7 @@ export class BlogListDto {
   }
 
   static by(blog: Blog) {
-    return new BlogListDto(blog.id, blog.title, blog.body, blog.updatedAt);
+    return new BlogDto(blog.id, blog.title, blog.body, blog.updatedAt);
   }
 
   @Expose()

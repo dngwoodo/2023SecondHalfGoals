@@ -14,7 +14,7 @@ export class BlogListRequest {
 
     return this.pageNumber;
   }
-  
+
   @Expose()
   get pageSize(): number {
     if (!this.pageSize) {
