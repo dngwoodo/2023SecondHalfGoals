@@ -1,4 +1,4 @@
-describe('BlogListDto', () => {
+describe('BlogDto', () => {
   it('', () => {
     // given
     // when

@@ -6,7 +6,7 @@ import { Test } from '@nestjs/testing';
 import { BlogFactory } from '../../../libs/entity/test/factory/BlogFactory';
 import { BlogRepository } from '../../../src/module/blog/BlogRepository';
 import { BlogService } from '../../../src/module/blog/BlogService';
-import { BlogDto } from '../../../src/module/blog/dto/BlogListDto';
+import { BlogDto } from '../../../src/module/blog/dto/BlogDto';
 
 describe('BlogService', () => {
   let blogFactory: BlogFactory;
@@ -71,15 +71,3 @@ describe('BlogService', () => {
     });
   });
 });
-
-/**
- * e2e 와 관련된 논의
- * 사용자의 input -> output 까지의 모든 과정을 말한다.
- * api 로 따지면 client request -> server response 까지의 과정을 말한다.
- * 그래서 controller 이기 때문에 이것이 e2e 테스트이다.
- * 그러나 모듈을 모킹해서 테스트하고 있는데 이것이 e2e 인가 ?
- * 사실상 근데 서비스랑 쿼리 레포지토리는 각각의 통합 테스트를 짜고 있다.
- * 이미 통합 테스트를 짰는데 중복되는 테스트를 또 짜는 것이다.
- * 그렇기 때문에 service, repository 단을 모킹해서 테스트한다.
- * 가장 큰 이유는 테스트 속도 때문에 모킹을 하는 것이다!
- */

@@ -1,4 +1,4 @@
-import { BlogDto } from '../dto/BlogListDto';
+import { BlogDto } from '../dto/BlogDto';
 import { Exclude, Expose } from 'class-transformer';
 
 export class BlogListResponse {

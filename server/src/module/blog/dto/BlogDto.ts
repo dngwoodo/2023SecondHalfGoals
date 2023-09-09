@@ -25,6 +25,10 @@ export class BlogDto {
     this._updatedAt = updatedAt;
   }
 
+  /**
+   * NOTE
+   * 팩토리 메서드
+   */
   static by(blog: Blog) {
     return new BlogDto(blog.id, blog.title, blog.body, blog.updatedAt);
   }
