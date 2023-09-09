@@ -26,7 +26,7 @@ const config: MikroOrmModuleOptions = {
     createForeignKeyConstraints: false,
   },
   allowGlobalContext: true,
-  debug: false,
+  debug: true,
 };
 
 export default config;

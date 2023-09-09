@@ -1,31 +1,32 @@
-import { Exclude, Expose } from "class-transformer";
-
-class User {}
+import { Blog } from '@app/entity/domain/blog/Blog.entity';
+import { LocalDateTime } from '@js-joda/core';
+import { Exclude, Expose } from 'class-transformer';
 
 export class BlogListDto {
   @Exclude()
   private readonly _id: number;
-  @Exclude()
-  private readonly _user: User;
+
   @Exclude()
   private readonly _title: string;
   @Exclude()
   private readonly _body: string;
   @Exclude()
-  private readonly _updatedAt: Date;
+  private readonly _updatedAt: LocalDateTime;
 
   constructor(
     id: number,
-    user: User,
     title: string,
     body: string,
-    updatedAt: Date,
+    updatedAt: LocalDateTime,
   ) {
     this._id = id;
-    this._user = user;
     this._title = title;
     this._body = body;
     this._updatedAt = updatedAt;
+  }
+
+  static by(blog: Blog) {
+    return new BlogListDto(blog.id, blog.title, blog.body, blog.updatedAt);
   }
 
   @Expose()
@@ -45,11 +46,6 @@ export class BlogListDto {
 
   @Expose()
   get updatedAt() {
-    return this._updatedAt;
-  }
-
-  @Expose()
-  get user() {
-    return this._user;
+    return this._updatedAt.toString();
   }
 }

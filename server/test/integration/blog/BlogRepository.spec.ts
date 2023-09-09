@@ -60,6 +60,11 @@ describe('BlogRepository', () => {
       const result = await blogRepository.findOne(blog.id);
 
       // then
+      // console.log('result.createdAt', result.createdAt);
+      // result.createdAt LocalDateTime {
+      //   _date: LocalDate { _year: 2023, _month: 9, _day: 9 },
+      //   _time: LocalTime { _hour: 16, _minute: 13, _second: 26, _nano: 102000000 }
+      // }
       expect(result.id).toBe(blog.id);
     });
   });

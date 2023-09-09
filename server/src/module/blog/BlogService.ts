@@ -1,16 +1,20 @@
 import { Injectable } from '@nestjs/common';
 import { BlogRepository } from './BlogRepository';
-import { BlogListResponse } from './response/BlogListResponse';
+import { BlogListDto } from './dto/BlogListDto';
 
 @Injectable()
 export class BlogService {
   constructor(private readonly blogRepository: BlogRepository) {}
+
   async findList(
-    pageNumber: number,
-    pageSize: number,
     limit: number,
     offset: number,
-  ): Promise<BlogListResponse> {
-    return new BlogListResponse([], 0, 0);
+  ): Promise<[BlogListDto[], number]> {
+    const [blogs, totalCount] = await this.blogRepository.findList(
+      limit,
+      offset,
+    );
+
+    return [blogs.map(BlogListDto.by), totalCount];
   }
 }

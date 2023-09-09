@@ -1,5 +1,5 @@
-import { BlogListDto } from "../dto/BlogListDto";
-import { Exclude, Expose } from "class-transformer";
+import { BlogListDto } from '../dto/BlogListDto';
+import { Exclude, Expose } from 'class-transformer';
 
 export class BlogListResponse {
   @Exclude()
@@ -9,7 +9,7 @@ export class BlogListResponse {
   @Exclude()
   private readonly _totalPage: number;
 
-  constructor(items: BlogListDto[],totalCount: number,totalPage: number) {
+  constructor(items: BlogListDto[], totalCount: number, totalPage: number) {
     this._items = items;
     this._totalCount = totalCount;
     this._totalPage = totalPage;
