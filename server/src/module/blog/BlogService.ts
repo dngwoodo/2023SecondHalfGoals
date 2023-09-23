@@ -1,11 +1,17 @@
+import { BlogEntity } from '@app/entity/domain/blog/BlogEntity';
 import { Injectable } from '@nestjs/common';
 import { DomainException } from 'src/filter/DomainExeption';
+import { TransactionService } from '../../transaction/TransactionService';
 import { BlogRepository } from './BlogRepository';
+import { BlogCreationDto } from './dto/BlogCreationDto';
 import { BlogDto } from './dto/BlogDto';
 
 @Injectable()
 export class BlogService {
-  constructor(private readonly blogRepository: BlogRepository) {}
+  constructor(
+    private readonly blogRepository: BlogRepository,
+    private readonly transactionService: TransactionService,
+  ) {}
 
   async findList(limit: number, offset: number): Promise<[BlogDto[], number]> {
     const [blogs, totalCount] = await this.blogRepository.findList(
@@ -49,5 +55,16 @@ export class BlogService {
     }
 
     return BlogDto.by(blog);
+  }
+
+  async create(blogCreationDto: BlogCreationDto) {
+    const blog = new BlogEntity();
+
+    blog.title = blogCreationDto.title;
+    blog.body = blogCreationDto.body;
+
+    await this.transactionService.transactional(async (manager) => {
+      await manager.persistAndFlush(blog);
+    });
   }
 }
