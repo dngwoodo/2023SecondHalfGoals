@@ -1,6 +1,4 @@
-import { BlogEntity } from '@app/entity/domain/blog/BlogEntity';
-
-export class BlogCreationDto {
+export class BlogUpdateDto {
   private readonly _title: string;
   private readonly _body: string;
 
@@ -15,9 +13,5 @@ export class BlogCreationDto {
 
   get body(): string {
     return this._body;
-  }
-
-  toBlogEntity() {
-    return BlogEntity.create(this._title, this._body);
   }
 }

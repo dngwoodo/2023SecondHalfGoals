@@ -1,12 +1,6 @@
-import { Transform } from 'class-transformer';
 import { IsNotEmpty, IsString, MaxLength } from 'class-validator';
 import { BlogCreationDto } from '../dto/BlogCreationDto';
-
-function Trim() {
-  return Transform(({ value }) =>
-    typeof value === 'string' ? value.trim() : value,
-  );
-}
+import { Trim } from '../../../utils/Trim';
 
 export class BlogCreationRequest {
   @Trim()

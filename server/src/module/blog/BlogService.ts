@@ -4,6 +4,7 @@ import { TransactionService } from '../../transaction/TransactionService';
 import { BlogRepository } from './BlogRepository';
 import { BlogCreationDto } from './dto/BlogCreationDto';
 import { BlogDto } from './dto/BlogDto';
+import { BlogUpdateDto } from './dto/BlogUpdateDto';
 
 @Injectable()
 export class BlogService {
@@ -58,7 +59,24 @@ export class BlogService {
 
   async create(blogCreationDto: BlogCreationDto) {
     await this.transactionService.transactional(async (manager) => {
-      await manager.persistAndFlush(blogCreationDto.toBlogEntity());
+      manager.persistAndFlush(blogCreationDto.toBlogEntity());
+    });
+  }
+
+  async update(blogId: number, blogUpdateDto: BlogUpdateDto) {
+    const blog = await this.blogRepository.findOne(blogId);
+
+    if (!blog) {
+      throw DomainException.NotFound({
+        message: '블로그 글이 존재하지 않습니다',
+      });
+    }
+
+    // TODO: blogUpdateDto 내부 메서드에서 처리해도 괜찮은 방법일까?
+    blog.update(blogUpdateDto.title, blogUpdateDto.body);
+
+    await this.transactionService.transactional(async (manager) => {
+      manager.persist(blog);
     });
   }
 }

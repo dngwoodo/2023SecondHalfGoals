@@ -51,4 +51,9 @@ export class BlogEntity {
 
     return blog;
   }
+
+  update(title: string, body: string) {
+    this.title = title;
+    this.body = body;
+  }
 }
