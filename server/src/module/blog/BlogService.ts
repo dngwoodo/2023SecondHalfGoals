@@ -79,4 +79,20 @@ export class BlogService {
       manager.persist(blog);
     });
   }
+
+  async delete(blogId: number) {
+    const blog = await this.blogRepository.findOne(blogId);
+
+    if (!blog) {
+      throw DomainException.NotFound({
+        message: '블로그 글이 존재하지 않습니다',
+      });
+    }
+
+    blog.delete();
+
+    await this.transactionService.transactional(async (manager) => {
+      manager.persist(blog);
+    });
+  }
 }

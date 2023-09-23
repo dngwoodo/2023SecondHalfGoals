@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { ResponseEntity } from 'src/response/ResponseEntity';
 import { BlogService } from './BlogService';
 import { BlogCreationRequest } from './request/BlogCreationRequest';
@@ -47,6 +55,13 @@ export class BlogController {
     @Body() request: BlogUpdateRequest,
   ) {
     await this.blogService.update(id, request.toBlogUpdateDto());
+
+    return ResponseEntity.OK();
+  }
+
+  @Delete('/:id')
+  async deleteBlog(@Param('id') id: number) {
+    await this.blogService.delete(id);
 
     return ResponseEntity.OK();
   }

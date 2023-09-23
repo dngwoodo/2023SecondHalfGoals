@@ -56,4 +56,8 @@ export class BlogEntity {
     this.title = title;
     this.body = body;
   }
+
+  delete(now = LocalDateTime.now()) {
+    this.deletedAt = now;
+  }
 }
