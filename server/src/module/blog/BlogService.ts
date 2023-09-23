@@ -1,4 +1,3 @@
-import { BlogEntity } from '@app/entity/domain/blog/BlogEntity';
 import { Injectable } from '@nestjs/common';
 import { DomainException } from 'src/filter/DomainExeption';
 import { TransactionService } from '../../transaction/TransactionService';
@@ -58,13 +57,8 @@ export class BlogService {
   }
 
   async create(blogCreationDto: BlogCreationDto) {
-    const blog = new BlogEntity();
-
-    blog.title = blogCreationDto.title;
-    blog.body = blogCreationDto.body;
-
     await this.transactionService.transactional(async (manager) => {
-      await manager.persistAndFlush(blog);
+      await manager.persistAndFlush(blogCreationDto.toBlogEntity());
     });
   }
 }

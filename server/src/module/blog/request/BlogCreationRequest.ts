@@ -1,5 +1,6 @@
 import { Transform } from 'class-transformer';
 import { IsNotEmpty, IsString, MaxLength } from 'class-validator';
+import { BlogCreationDto } from '../dto/BlogCreationDto';
 
 function Trim() {
   return Transform(({ value }) =>
@@ -18,4 +19,8 @@ export class BlogCreationRequest {
   @IsString()
   @IsNotEmpty()
   body: string;
+
+  toBlogCreationDto() {
+    return new BlogCreationDto(this.title, this.body);
+  }
 }

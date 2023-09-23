@@ -1,19 +1,10 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Post,
-  Put,
-} from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ResponseEntity } from 'src/response/ResponseEntity';
 import { BlogService } from './BlogService';
+import { BlogCreationRequest } from './request/BlogCreationRequest';
 import { BlogListRequest } from './request/BlogListRequest';
 import { BlogListResponse } from './response/BlogListResponse';
 import { BlogResponse } from './response/BlogResponse';
-import { BlogCreationRequest } from './request/BlogCreationRequest';
-import { BlogCreationDto } from './dto/BlogCreationDto';
 
 @Controller('/blogs')
 export class BlogController {
@@ -44,9 +35,7 @@ export class BlogController {
 
   @Post()
   async createBlog(@Body() request: BlogCreationRequest) {
-    await this.blogService.create(
-      new BlogCreationDto(request.title, request.body),
-    );
+    await this.blogService.create(request.toBlogCreationDto());
 
     return ResponseEntity.OK();
   }
