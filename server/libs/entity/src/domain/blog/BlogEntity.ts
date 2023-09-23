@@ -1,6 +1,7 @@
 import { LocalDateTimeType } from '@app/entity/type/LocalDateTimeType';
 import { LocalDateTime } from '@js-joda/core';
 import { Entity, PrimaryKey, Property } from '@mikro-orm/core';
+
 @Entity()
 export class BlogEntity {
   /**

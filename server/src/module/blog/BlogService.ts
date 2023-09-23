@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { DomainException } from 'src/filter/DomainExeption';
 import { BlogRepository } from './BlogRepository';
 import { BlogDto } from './dto/BlogDto';
 
@@ -24,5 +25,29 @@ export class BlogService {
      * 팩토리 메서드는 객체를 생성하는 로직을 분리할 수 있다.
      */
     return [blogs.map(BlogDto.by), totalCount];
+  }
+
+  async findOne(id: number): Promise<BlogDto | null> {
+    const blog = await this.blogRepository.findOne(id);
+
+    /**
+     * NOTE
+     * 각 레이어에 맞는 예외 처리를 해줘야 한다.
+     * 1. Controller:  클라이언트의 요청을 처리하고 해당 요청에 대한 응답을 반환하는 역할
+     * 2. Service: 비즈니스 로직을 구현하고 데이터 처리 및 조작을 수행하는 역할
+     * 3. Repository: 데이터베이스와 상호 작용하기 위한 역할
+     * 해당 예외는 가능한 가장 먼 곳에서 처리해줘야 한다. 이유는 아래와 같다.
+     * 1. 가장 가까운 곳에서 처리를 해주게 되면 findOne 메서드를 사용하는 모든 곳에서 예외 처리를 해줘야 한다.
+     * 2. 반면 글로벌 핸들러 혹은 미들웨어 등 최상위 계층에서 예외를 처리하면 코드의 가독성과 재사용성에 도움이 된다.
+     * 3. 가독성, 재사용성, 통일성 에 장점을 가질 수 있다.
+     * @see https://jojoldu.tistory.com/734
+     */
+    if (!blog) {
+      throw DomainException.NotFound({
+        message: '블로그 글이 존재하지 않습니다',
+      });
+    }
+
+    return BlogDto.by(blog);
   }
 }

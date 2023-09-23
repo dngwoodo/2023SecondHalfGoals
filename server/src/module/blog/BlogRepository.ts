@@ -13,7 +13,11 @@ export class BlogRepository {
   ) {}
 
   async findOne(id: number): Promise<BlogEntity | null> {
-    return this.blogRepository.findOne({ id }); // {} <- where 절
+    const where: FilterQuery<BlogEntity> = {
+      id,
+    };
+
+    return this.blogRepository.findOne(where);
   }
 
   async findList(

@@ -18,6 +18,9 @@ const config: MikroOrmModuleOptions = {
    * 컬럼들을 카멜케이스 -> 스네이크 케이스로 알아서 변경해줌.
    */
   metadataProvider: TsMorphMetadataProvider,
+  /**
+   * TODO: 이거 뭔지 알아보기
+   */
   entities: [],
   entitiesTs: [],
   autoLoadEntities: true,

@@ -41,7 +41,7 @@ describe('BlogRepository', () => {
   });
 
   /**
-   * NOTe
+   * NOTE
    * DB 에 data 초기화
    */
   beforeEach(async () => await orm.getSchemaGenerator().clearDatabase());
