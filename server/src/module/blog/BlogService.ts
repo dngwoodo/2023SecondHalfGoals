@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { DomainException } from 'src/filter/DomainExeption';
+import { DomainException } from '../../../src/filter/DomainExeption';
 import { TransactionService } from '../../transaction/TransactionService';
 import { BlogRepository } from './BlogRepository';
 import { BlogCreationDto } from './dto/BlogCreationDto';

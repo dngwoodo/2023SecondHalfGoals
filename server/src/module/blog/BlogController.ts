@@ -7,7 +7,7 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { ResponseEntity } from 'src/response/ResponseEntity';
+import { ResponseEntity } from '../../../src/response/ResponseEntity';
 import { BlogService } from './BlogService';
 import { BlogCreationRequest } from './request/BlogCreationRequest';
 import { BlogListRequest } from './request/BlogListRequest';

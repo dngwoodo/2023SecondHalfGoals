@@ -5,6 +5,7 @@ import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { Test } from '@nestjs/testing';
 import { BlogFactory } from '../../../libs/entity/test/factory/BlogFactory';
 import { BlogRepository } from '../../../src/module/blog/BlogRepository';
+import { TransactionService } from '../../../src/transaction/TransactionService';
 
 describe('BlogRepository', () => {
   let blogFactory: BlogFactory;
@@ -18,7 +19,7 @@ describe('BlogRepository', () => {
        * 나중에 config 는 테스트 용을 따로 만들어줘야 한다.
        */
       imports: [MikroOrmModule.forRoot(config), BlogModule],
-      providers: [BlogRepository],
+      providers: [BlogRepository, TransactionService],
     }).compile();
 
     /**

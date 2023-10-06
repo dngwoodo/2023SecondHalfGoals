@@ -3,7 +3,7 @@ import { BlogController } from './BlogController';
 import { BlogService } from './BlogService';
 import { BlogRepository } from './BlogRepository';
 import { BlogModule } from '@app/entity/domain/blog/BlogModule';
-import { TransactionService } from 'src/transaction/TransactionService';
+import { TransactionService } from '../../../src/transaction/TransactionService';
 
 @Module({
   imports: [BlogModule],

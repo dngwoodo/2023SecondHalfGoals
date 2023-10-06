@@ -1,4 +1,4 @@
-import { ResponseStatus } from 'src/response/ResponseStatus';
+import { ResponseStatus } from '../../src/response/ResponseStatus';
 
 type DefaultFactoryParameter = {
   message: string;

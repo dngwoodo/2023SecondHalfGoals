@@ -7,6 +7,7 @@ import { BlogFactory } from '../../../libs/entity/test/factory/BlogFactory';
 import { BlogRepository } from '../../../src/module/blog/BlogRepository';
 import { BlogService } from '../../../src/module/blog/BlogService';
 import { BlogDto } from '../../../src/module/blog/dto/BlogDto';
+import { TransactionService } from '../../../src/transaction/TransactionService';
 
 describe('BlogService', () => {
   let blogFactory: BlogFactory;
@@ -20,7 +21,7 @@ describe('BlogService', () => {
        * 나중에 config 는 테스트 용을 따로 만들어줘야 한다.
        */
       imports: [MikroOrmModule.forRoot(config), BlogModule],
-      providers: [BlogService, BlogRepository],
+      providers: [BlogService, BlogRepository, TransactionService],
     }).compile();
 
     /**

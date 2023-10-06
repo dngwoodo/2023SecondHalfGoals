@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsString, MaxLength } from 'class-validator';
-import { Trim } from 'src/utils/Trim';
+import { Trim } from '../../../utils/Trim';
 import { BlogUpdateDto } from '../dto/BlogUpdateDto';
 
 export class BlogUpdateRequest {

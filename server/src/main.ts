@@ -1,6 +1,6 @@
 import { NestFactory, Reflector } from '@nestjs/core';
 import { AppApiModule } from './AppApiModule';
-import { ClassSerializerInterceptor } from '@nestjs/common';
+import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
 import { GlobalExceptionFilter } from './filter/GlobalExceptionFilter';
 import { DomainExceptionFilter } from './filter/DomainExceptionFilter';
 import { Logger } from './logger/Logger';
@@ -21,6 +21,8 @@ async function bootstrap() {
    * NOTE: Interceptor 셋팅
    */
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
+
+  app.useGlobalPipes(new ValidationPipe());
 
   /**
    * NOTE: filter 셋팅
