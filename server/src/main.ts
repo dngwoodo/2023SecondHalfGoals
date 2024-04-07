@@ -4,6 +4,7 @@ import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
 import { GlobalExceptionFilter } from './filter/GlobalExceptionFilter';
 import { DomainExceptionFilter } from './filter/DomainExceptionFilter';
 import { Logger } from './logger/Logger';
+import { MikroORM } from '@mikro-orm/postgresql';
 
 /**
  * @description
@@ -33,6 +34,16 @@ async function bootstrap() {
     new DomainExceptionFilter(logger),
   );
 
+  /**
+   * NOTE: 데이터베이스 마이그레이션 실행
+   * @see https://mikro-orm.io/docs/migrations#using-the-migrator-programmatically
+   */
+  const mikroOrm = app.get(MikroORM);
+  // const migrator = mikroOrm.getMigrator();
+  // await migrator.up();
+  mikroOrm.getSchemaGenerator().refreshDatabase();
+
   await app.listen(3000);
 }
+
 bootstrap();

@@ -21,7 +21,9 @@ export class DomainExceptionFilter implements ExceptionFilter {
 
   catch(exception: DomainException, host: ArgumentsHost): any {
     const request = host.switchToHttp().getRequest<Request>();
-    const response = host.switchToHttp().getResponse<Response>();
+    const response = host
+      .switchToHttp()
+      .getResponse<Response<any, Record<string, any>>>();
 
     this.logger.info(
       this.getErrorLogMessageTemplate(request, exception),

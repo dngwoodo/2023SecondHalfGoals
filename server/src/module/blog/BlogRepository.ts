@@ -24,7 +24,7 @@ export class BlogRepository {
     limit: number,
     offset: number,
   ): Promise<[BlogEntity[], number]> {
-    const where: FilterQuery<BlogEntity> = {
+    const where: FilterQuery<BlogEntity> = { 
       deletedAt: null,
       createdAt: { $gte: LocalDateTime.now().minusMonths(2) },
     };

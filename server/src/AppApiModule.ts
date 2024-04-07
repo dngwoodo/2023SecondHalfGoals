@@ -10,8 +10,7 @@ import { LoggerModule } from './logger/LoggerModule';
     MikroOrmModule.forRoot(config),
     BlogApiModule,
   ],
-
-  controllers: [],
   providers: [],
+  controllers: [],
 })
 export class AppApiModule {}
